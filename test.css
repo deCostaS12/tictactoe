@@ -1,0 +1,24 @@
+.top{
+    display: flex;
+    
+    
+    
+}
+
+
+.mid{
+    display: flex;
+}
+
+.bottom{
+    display: flex;
+}
+
+.square{
+    display: flex;
+    border-style: solid;
+    font-size: 100px;
+    width: 100px;
+    justify-content: center;
+    height: 100px;
+}
