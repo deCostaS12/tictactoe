@@ -1,19 +1,20 @@
 let selection = "X";
 let counter = 0;
 let boxes = document.getElementsByClassName("square");
-let player1 = "";
-let player2 = "";
-let currentPlayer = "";
+let player1;
+let player2;
+let currentPlayer;
+
 
 
 for(let i=0; i<boxes.length; i++ ){
   boxes[i].addEventListener('click',function(){
     if(!this.textContent){
-      this.textContent = selection;
-      switchMark();
+      this.textContent = currentPlayer.marker;
       setTimeout(function() {
         winning();
       }, 10);
+      
       
     }
     else{
@@ -30,25 +31,40 @@ function startGame(){
     let players = document.getElementById("players");
     let gameBoard = document.getElementById("gameBoard");
     let name = document.getElementById("turn");
-    player1 = document.getElementById("player1").value;
-    player2 = document.getElementById("player2").value;
+    let player_init_1 = document.getElementById("player1")
+    let player_init_2 = document.getElementById("player2")
+    player1 = new player(player_init_1.value,player_init_1.getAttribute("data-mark"));
+    player2 = new player(player_init_2.value,player_init_2.getAttribute("data-mark"));
+    // player1 = document.getElementById("player1").value;
+    // player2 = document.getElementById("player2").value;
     currentPlayer = player1;
-
-    name.textContent = "It's " + currentPlayer + "'s turn";
+    name.textContent = "It's " + currentPlayer.name + "'s turn";
     players.style.display = "none";
     gameBoard.style.display = "block";
     
 
 }
 
+function player(name, marker){
+
+  this.name = name;
+  this.marker = marker;
+
+}
+
 
 function switchMark(){
 
-  if(selection =="X" ){
-    selection = "O";
+  if(currentPlayer == player1 ){
+    currentPlayer = player2
+    let name = document.getElementById("turn");
+    name.textContent = "It's " + currentPlayer.name + "'s turn";
+
   }
   else {
-    selection = "X"
+    currentPlayer = player1;
+    let name = document.getElementById("turn");
+    name.textContent = "It's " + currentPlayer.name + "'s turn";
   }
 
 
@@ -78,43 +94,43 @@ function winning(){
   let bottomThird = document.getElementById("bottomThird");
   
   if(topFirst.textContent && topFirst.textContent == topSecond.textContent && topSecond.textContent == topThird.textContent){
-    alert("Winner is " + topFirst.textContent);
+    alert("Winner is " + currentPlayer.name);
     gameEnd()
   }
   else if(midFirst.textContent && midFirst.textContent == midSecond.textContent && midSecond.textContent == midThird.textContent){
     
-    alert("Winner is " + midFirst.textContent);
+    alert("Winner is " + currentPlayer.name);
     gameEnd()
   }
   else if(bottomFirst.textContent && bottomFirst.textContent == bottomSecond.textContent && bottomSecond.textContent == bottomThird.textContent){
     
-    alert("Winner is " + bottomFirst.textContent);
+    alert("Winner is " + currentPlayer.name);
     gameEnd()
   }
   else if(topFirst.textContent && topFirst.textContent == midFirst.textContent && midFirst.textContent == bottomFirst.textContent){
     
-    alert("Winner is " + topFirst.textContent);
+    alert("Winner is " + currentPlayer.name);
     gameEnd()
   }
   else if(topSecond.textContent && topSecond.textContent == midSecond.textContent && midSecond.textContent == bottomSecond.textContent){
     
-    alert("Winner is " + topSecond.textContent);
+    alert("Winner is " + currentPlayer.name);
     gameEnd()
   }
   else if(topThird.textContent && topThird.textContent == midThird.textContent && midThird.textContent == bottomThird.textContent){
     
-    alert("Winner is " + topThird.textContent);
+    alert("Winner is " + currentPlayer.name);
     gameEnd();
   }
   else if(topFirst.textContent && topFirst.textContent == midSecond.textContent && midSecond.textContent == bottomThird.textContent){
     
-    alert("Winner is " + topFirst.textContent);
+    alert("Winner is " + currentPlayer.name);
     gameEnd()
 
   }
   else if(bottomThird.textContent && bottomThird.textContent == midSecond.textContent && midSecond.textContent == topFirst.textContent){
     
-    alert("Winner is " + bottomFirst.textContent);
+    alert("Winner is " + currentPlayer.name);
     gameEnd()
 
   }
@@ -122,6 +138,9 @@ function winning(){
     alert("It's a draw");
     gameEnd()
     
+  }
+  else{
+    switchMark();
   }
 
 }
