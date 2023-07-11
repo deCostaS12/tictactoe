@@ -30,6 +30,7 @@ function startGame(){
     
     let players = document.getElementById("players");
     let gameBoard = document.getElementById("gameBoard");
+    let statrBtn = document.getElementById("startBtn");
     let name = document.getElementById("turn");
     let player_init_1 = document.getElementById("player1")
     let player_init_2 = document.getElementById("player2")
@@ -40,7 +41,9 @@ function startGame(){
     currentPlayer = player1;
     name.textContent = "It's " + currentPlayer.name + "'s turn";
     players.style.display = "none";
+    statrBtn.style.display ="none";
     gameBoard.style.display = "block";
+
     
 
 }
@@ -128,7 +131,7 @@ function winning(){
     gameEnd()
 
   }
-  else if(bottomThird.textContent && bottomThird.textContent == midSecond.textContent && midSecond.textContent == topFirst.textContent){
+  else if(bottomFirst.textContent && bottomFirst.textContent == midSecond.textContent && midSecond.textContent == topThird.textContent){
     
     alert("Winner is " + currentPlayer.name);
     gameEnd()
