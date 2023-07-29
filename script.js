@@ -1,3 +1,4 @@
+//Global Variables
 let selection = "X";
 let counter = 0;
 let boxes = document.getElementsByClassName("square");
@@ -6,10 +7,10 @@ let player2;
 let currentPlayer;
 
 
-
+//Adding event listeners to the boxes
 for(let i=0; i<boxes.length; i++ ){
   boxes[i].addEventListener('click',function(){
-    if(!this.textContent){
+    if(!this.textContent){ //Checking if the a box has been marked prior
       this.textContent = currentPlayer.marker;
       setTimeout(function() {
         winning();
@@ -48,7 +49,7 @@ function startGame(){
 
 }
 
-function player(name, marker){
+function player(name, marker){ //defining player object
 
   this.name = name;
   this.marker = marker;
@@ -56,7 +57,7 @@ function player(name, marker){
 }
 
 
-function switchMark(){
+function switchMark(){ //Switching the player once they have marked a square
 
   if(currentPlayer == player1 ){
     currentPlayer = player2
@@ -73,9 +74,10 @@ function switchMark(){
 
 }
 
-function gameEnd(){
+function gameEnd(){ //Defining the end of a game
   counter = 0;
   selection = "X";
+  switchMark();
 
   for(let x=0;x<boxes.length;x++){
     boxes[x].textContent = ""
@@ -83,7 +85,7 @@ function gameEnd(){
 }
 
 
-function winning(){
+function winning(){ //Fuction to check if either of players have won the game
 
   counter += 1;
   let topFirst = document.getElementById("topFirst");
